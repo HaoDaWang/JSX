@@ -1,9 +1,11 @@
 import { html } from "./html-parser";
 import { render } from "./renderer";
 
-render(
-  html`
-    <h1 style="color:red;">Hello</h1>
-  `,
-  document.querySelector("#root")
-);
+let node = html`
+  <div>
+    <h1>Hello</h1>
+    <h2>ST</h2>
+  </div>
+`;
+
+render(node, document.querySelector("#root"));
