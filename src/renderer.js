@@ -1,11 +1,11 @@
 function r(ele, domEle) {
-  let { tag, attrs = {}, children } = ele;
-  let dom = document.createElement(tag);
-
   if (Object.prototype.toString.call(ele) === "[object String]") {
     domEle.appendChild(document.createTextNode(ele));
     return domEle;
   }
+
+  let { tag, attrs = {}, children } = ele;
+  let dom = document.createElement(tag);
 
   // Attributes
   for (let attrName of Object.keys(attrs)) {
@@ -15,6 +15,11 @@ function r(ele, domEle) {
   // Children
   for (let child of children) {
     dom = r(child, dom);
+  }
+
+  if (domEle) {
+    domEle.appendChild(dom);
+    return domEle;
   }
 
   return dom;
