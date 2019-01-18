@@ -4,13 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "gulp"
+    "watch": "gulp",
+    "dev": "webpack-dev-server"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "7",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
-    "gulp": "^4.0.0"
+    "gulp": "^4.0.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   }
 }
