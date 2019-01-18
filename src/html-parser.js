@@ -1,5 +1,9 @@
 import { createElement } from "./create-element";
 
+const BASE_REGEX = `<([a-zA-Z0-9]+)\\s*(?:\\s*([a-zA-Z0-9-]+=(["']).*\\3))*>([^<>]*)(.*?)([^<>]*)<\\/\\1>`;
+const HTML_MATCH_VALIDATE = new RegExp(BASE_REGEX);
+const HTML_MATCH = new RegExp(BASE_REGEX + "(.*)");
+
 function _createElement(result) {
   return createElement(
     result[1],
@@ -31,8 +35,10 @@ function parseAttribute(attr) {
 }
 
 function h(source, ele) {
-  const regex = /<([a-zA-Z0-9]+)\s*(?:\s*([a-zA-Z0-9-]+=(["']).*\3))*>([^<>]*)(.*?)([^<>]*)<\/\1>(.*)/;
+  let regex = ele ? HTML_MATCH : HTML_MATCH_VALIDATE;
+
   let result = exec(regex, source);
+  console.info(result);
 
   if (!result) {
     throw new Error("Please Make sure the HTML expression are correct!");
@@ -41,7 +47,7 @@ function h(source, ele) {
   let inner = result[5];
   let currentEle = ele;
 
-  if (result[7]) {
+  if (result[7] && !ele) {
     throw new Error("The HTML expression can only have one root Element!");
   }
 
